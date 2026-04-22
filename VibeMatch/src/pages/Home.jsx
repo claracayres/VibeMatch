@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginWithSpotify } from "../services/auth";
 import Navbar from "../components/HomeNav";
-import ColorBends from "../components/ColorBends";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -18,26 +17,6 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050507] text-white">
       <Navbar />
-
-      <div className="absolute inset-0 -z-20">
-        <ColorBends
-          rotation={90}
-          speed={0.2}
-          colors={["#5227FF", "#FF9FFC", "#7cff67"]}
-          transparent
-          autoRotate={0.65}
-          scale={1}
-          frequency={1}
-          warpStrength={1}
-          mouseInfluence={1.3}
-          parallax={0.5}
-          noise={0}
-          iterations={1}
-          intensity={0.45}
-          bandWidth={6}
-        />
-      </div>
-
       <div className="absolute inset-0 -z-10 bg-black/45" />
 
       <main className="relative z-10">
@@ -137,10 +116,7 @@ export default function Home() {
         </section>
 
         {/* COMO FUNCIONA */}
-        <section
-          id="como-funciona"
-          className="mx-auto max-w-7xl px-6 py-24"
-        >
+        <section id="como-funciona" className="mx-auto max-w-7xl px-6 py-24">
           <div className="mb-14 text-center">
             <p className="text-sm uppercase tracking-[0.3em] text-white/50">
               Como funciona
@@ -218,10 +194,7 @@ export default function Home() {
         </section>
 
         {/* FEATURES */}
-        <section
-          id="features"
-          className="mx-auto max-w-7xl px-6 py-24"
-        >
+        <section id="features" className="mx-auto max-w-7xl px-6 py-24">
           <div className="mb-14">
             <p className="text-sm uppercase tracking-[0.3em] text-white/50">
               Features
@@ -284,10 +257,7 @@ export default function Home() {
         </section>
 
         {/* FAQ */}
-        <section
-          id="faq"
-          className="mx-auto max-w-5xl px-6 py-24"
-        >
+        <section id="faq" className="mx-auto max-w-5xl px-6 py-24">
           <div className="mb-12 text-center">
             <p className="text-sm uppercase tracking-[0.3em] text-white/50">
               FAQ
