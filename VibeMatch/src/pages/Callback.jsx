@@ -48,8 +48,7 @@ export default function Callback() {
         const user = await fetchSpotifyProfile();
         localStorage.setItem("spotify_user", JSON.stringify(user));
 
-        window.history.replaceState({}, document.title, "/callback");
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       } catch (error) {
         console.error(error);
         alert(error.message);
