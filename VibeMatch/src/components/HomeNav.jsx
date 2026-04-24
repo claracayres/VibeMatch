@@ -23,13 +23,13 @@ export default function HomeNav() {
           {/* LINKS */}
           <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
             <a href="#features" className="hover:text-white transition">
-              Features
+              Recursos
             </a>
             <a href="#how" className="hover:text-white transition">
-              How it works
+              Como funciona
             </a>
             <a href="#mood" className="hover:text-white transition">
-              Weekly Mood
+              Mood
             </a>
           </div>
 
@@ -38,7 +38,7 @@ export default function HomeNav() {
             onClick={loginWithSpotify}
             className="rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-5 py-2 text-sm font-semibold text-white shadow-lg transition hover:scale-105"
           >
-            Connect Spotify
+            Conectar Spotify
           </button>
         </div>
       </div>

@@ -23,7 +23,7 @@ export default function Home() {
         {/* HERO */}
         <section className="mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-14 px-6 pt-28 pb-16 lg:grid-cols-2">
           <div className="animate-[fadeUp_.8s_ease]">
-            <span className="mb-5 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70 backdrop-blur-md">
+            <span className="mb-5 inline-flex text-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/70 backdrop-blur-md">
               Compatibilidade musical em segundos
             </span>
 
@@ -44,12 +44,12 @@ export default function Home() {
                 onClick={loginWithSpotify}
                 className="rounded-full bg-[#7cff67] px-7 py-4 text-base font-bold text-black transition hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(124,255,103,0.35)]"
               >
-                Connect Spotify
+                Conectar Spotify
               </button>
 
               <a
                 href="#como-funciona"
-                className="rounded-full border border-white/15 bg-white/5 px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/10"
+                className="rounded-full border text-center border-white/15 bg-white/5 px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition hover:bg-white/10"
               >
                 Ver como funciona
               </a>

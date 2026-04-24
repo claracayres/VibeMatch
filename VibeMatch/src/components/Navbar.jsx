@@ -36,21 +36,22 @@ export default function Navbar() {
 
             <button className="hover:text-white transition">Mood</button>
 
-            <button className="hover:text-white transition">Profile</button>
+            <button className="hover:text-white transition">Perfil</button>
           </div>
 
           {/* USER + LOGOUT */}
           <div className="flex items-center gap-3">
             {/* USER AVATAR */}
             <div className="flex items-center gap-2">
-              {user?.images?.[0] ? (
+              {user?.images?.length > 0 && user.images[0]?.url ? (
                 <img
                   src={user.images[0].url}
+                  alt={user.display_name || "User"}
                   className="h-9 w-9 rounded-full object-cover"
                 />
               ) : (
-                <div className="h-9 w-9 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-sm font-bold">
-                  {user?.display_name?.[0] || "U"}
+                <div className="h-9 w-9 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-sm font-bold text-white">
+                  {(user?.display_name?.[0] || "U").toUpperCase()}
                 </div>
               )}
 

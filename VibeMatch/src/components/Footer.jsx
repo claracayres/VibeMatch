@@ -29,21 +29,11 @@ export default function Footer() {
             Como funciona
           </a>
           <a href="#features" className="transition hover:text-white">
-            Features
+            Recursos
           </a>
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="transition hover:text-white"
-          >
-            Dashboard
-          </button>
-        </div>
-
-        <div className="text-sm text-zinc-500 md:text-right">
-          <p>© 2026 VibeMatch</p>
-          <p className="mt-2 flex items-center gap-1 md:justify-end">
-            Todos os direitos reservados.
-          </p>
+          <a href="#contact" className="transition hover:text-white">
+            Contato
+          </a>
         </div>
       </div>
     </footer>
