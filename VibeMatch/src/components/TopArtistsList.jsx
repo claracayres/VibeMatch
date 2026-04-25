@@ -46,10 +46,10 @@ export default function TopArtistsList({ topArtists }) {
                   </p>
                 </div>
 
-                <div className="max-w-[220px] text-right">
+                <div className="max-w-55 text-right">
                   <p className="truncate text-sm text-white/65">
                     {artist.genres?.length > 0
-                      ? artist.genres.slice(0, 2).join(" • ")
+                      ? artist.genres.slice(0, 3).join(" • ").toUpperCase()
                       : "Sem gêneros"}
                   </p>
                 </div>

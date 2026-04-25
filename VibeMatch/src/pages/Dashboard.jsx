@@ -144,8 +144,8 @@ export default function Dashboard() {
 
           <div className="mt-8 animate-pulse space-y-5">
             <div className="grid gap-5 xl:grid-cols-2">
-              <div className="h-[270px] rounded-[30px] border border-white/10 bg-white/5" />
-              <div className="h-[270px] rounded-[30px] border border-white/10 bg-white/5" />
+              <div className="h-67.5 rounded-[30px] border border-white/10 bg-white/5" />
+              <div className="h-67.5 rounded-[30px] border border-white/10 bg-white/5" />
             </div>
           </div>
         </div>
@@ -175,8 +175,8 @@ export default function Dashboard() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#07090D] text-white">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-[-120px] top-[30px] h-[340px] w-[340px] rounded-full bg-green-500/10 blur-[120px]" />
-        <div className="absolute right-[-100px] top-[220px] h-[320px] w-[320px] rounded-full bg-emerald-500/10 blur-[120px]" />
+        <div className="absolute -left-30 top-7.5 h-85 w-85 rounded-full bg-green-500/10 blur-[120px]" />
+        <div className="absolute -right-25 top-55 h-80 w-[320px] rounded-full bg-emerald-500/10 blur-[120px]" />
       </div>
 
       <Navbar />
@@ -202,13 +202,13 @@ export default function Dashboard() {
         </section>
 
         <section className="mb-5 grid items-stretch gap-5 xl:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-[30px] border border-white/10 bg-white/[0.04] p-1 backdrop-blur-xl">
-            <div className="h-full rounded-[28px] bg-gradient-to-br from-green-500/10 via-transparent to-transparent">
+          <div className="rounded-[30px] border border-white/10 bg-white/4 p-1 backdrop-blur-xl">
+            <div className="h-full rounded-[28px] bg-linear-to-br from-green-500/10 via-transparent to-transparent">
               <ProfileCard user={user} />
             </div>
           </div>
 
-          <div className="rounded-[34px] border border-white/10 bg-gradient-to-br from-[#11131a] via-[#0d0f15] to-[#11131a] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
+          <div className="rounded-[34px] border border-white/10 bg-linear-to-br from-[#11131a] via-[#0d0f15] to-[#11131a] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
             <div className="flex h-full w-full flex-col items-center justify-between gap-8">
               <div className="max-w-xl">
                 <p className="text-xs uppercase tracking-[0.22em] text-green-300/70">
@@ -228,7 +228,7 @@ export default function Dashboard() {
               <div className="w-full max-w-md">
                 <div className="flex w-full flex-col items-center gap-5">
                   {loadingQR ? (
-                    <div className="flex h-[130px] w-full items-center justify-center rounded-[32px] border border-dashed border-green-400/25 bg-white/[0.03] text-center text-sm text-white/35">
+                    <div className="flex h-32.5 w-full items-center justify-center rounded-4xl border border-dashed border-green-400/25 bg-white/3 text-center text-sm text-white/35">
                       Carregando QR...
                     </div>
                   ) : (
@@ -265,7 +265,7 @@ export default function Dashboard() {
         </section>
 
         <section className="mb-6">
-          <div className="rounded-[28px] border border-white/10 bg-gradient-to-br from-[#5227FF]/20 via-[#FF9FFC]/10 to-[#7cff67]/10 p-6 backdrop-blur-xl">
+          <div className="rounded-[28px] border border-white/10 bg-linear-to-br from-[#5227FF]/20 via-[#FF9FFC]/10 to-[#7cff67]/10 p-6 backdrop-blur-xl">
             <p className="text-xs uppercase tracking-[0.2em] text-white/50">
               Seu mood
             </p>
@@ -291,19 +291,19 @@ export default function Dashboard() {
         </section>
 
         <section className="grid gap-5 xl:grid-cols-2">
-          <div className="rounded-[30px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+          <div className="rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
             <TopArtistsList topArtists={topArtists} />
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+          <div className="rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
             <TopTracksList topTracks={topTracks} />
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+          <div className="rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
             <RecentTracksList recentTracks={recentTracks} />
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+          <div className="rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
             <PlaylistsList playlists={playlists} />
           </div>
         </section>

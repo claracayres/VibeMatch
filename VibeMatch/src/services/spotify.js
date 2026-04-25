@@ -1,4 +1,5 @@
 import { getValidAccessToken, refreshAccessToken } from "./auth";
+import { enrichArtistsWithGenres } from "./lastfm";
 
 async function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -129,7 +130,14 @@ export async function fetchTopArtists() {
     "Erro ao buscar top artistas",
   );
 
-  return {
-    items: Array.isArray(data?.items) ? data.items : [],
-  };
+  const items = Array.isArray(data?.items) ? data.items : [];
+
+  if (items.length === 0) return { items: [] };
+
+  const enriched = await enrichArtistsWithGenres(items);
+
+  return { items: enriched };
 }
+
+
+
