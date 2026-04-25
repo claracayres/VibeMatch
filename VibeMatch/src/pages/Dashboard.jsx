@@ -13,7 +13,6 @@ import ProfileCard from "../components/ProfileCard";
 import TopArtistsList from "../components/TopArtistsList";
 import TopTracksList from "../components/TopTracksList";
 import RecentTracksList from "../components/RecentTracksList";
-import PlaylistsList from "../components/PlaylistsList";
 import ProfileQrCode from "../components/ProfileQrCode";
 import MatchPage from "./Match";
 import { Navigate } from "react-router-dom";
@@ -28,7 +27,6 @@ function createUsername(name = "") {
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [recentTracks, setRecentTracks] = useState([]);
-  const [playlists, setPlaylists] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +58,6 @@ export default function Dashboard() {
         setRecentTracks(recentData?.items || []);
         setTopArtists(topArtistsData?.items || []);
         setTopTracks(topTracksData?.items || []);
-        setPlaylists([]);
       } catch (err) {
         if (!isMounted) return;
         console.error("ERRO NO DASHBOARD:", err);
@@ -106,9 +103,7 @@ export default function Dashboard() {
 
           topArtists: topArtists.slice(0, 20),
           topTracks: topTracks.slice(0, 20),
-          recentTracks: uniqueRecentTracks.slice(0, 20),
-
-          playlists: [],
+          recentTracks: uniqueRecentTracks.slice(0, 30),
         };
 
         await createOrGetShareProfile(user.id, profileData);
@@ -128,7 +123,7 @@ export default function Dashboard() {
     return () => {
       isMounted = false;
     };
-  }, [user, username, topArtists, topTracks, recentTracks, playlists]);
+  }, [user, username, topArtists, topTracks, recentTracks]);
 
   async function handleCopyLink() {
     if (!shareUrl) return;
@@ -201,8 +196,8 @@ export default function Dashboard() {
                 Olá, {user?.display_name || "Spotify User"}!
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/65 md:text-base">
-                Veja seu perfil, artistas favoritos, músicas mais ouvidas,
-                playlists e atividade recente em um só lugar.
+                Veja seu perfil, artistas favoritos, músicas mais ouvidas, e
+                atividade recente em um só lugar.
               </p>
             </div>
           </div>
@@ -306,12 +301,8 @@ export default function Dashboard() {
             <TopTracksList topTracks={topTracks} />
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
+          <div className="xl:col-span-2 rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
             <RecentTracksList recentTracks={recentTracks} />
-          </div>
-
-          <div className="rounded-[30px] border border-white/10 bg-white/4 p-6 backdrop-blur-xl">
-            <PlaylistsList playlists={playlists} />
           </div>
         </section>
       </main>

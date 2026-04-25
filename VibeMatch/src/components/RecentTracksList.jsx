@@ -1,98 +1,75 @@
-function formatDuration(ms) {
-  if (!ms) return "--";
-  const totalSeconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${minutes}:${String(seconds).padStart(2, "0")}`;
-}
+import { motion } from "framer-motion";
 
-function getTimeAgo(playedAt) {
-  if (!playedAt) return "Agora há pouco";
+export default function RecentTracksList({ recentTracks = [] }) {
+  function getTimeAgo(dateString) {
+    const now = new Date();
+    const playedAt = new Date(dateString);
+    const diff = Math.floor((now - playedAt) / 1000);
 
-  const now = new Date();
-  const playedDate = new Date(playedAt);
-  const diffMs = now - playedDate;
-
-  const diffMinutes = Math.floor(diffMs / 1000 / 60);
-  const diffHours = Math.floor(diffMinutes / 60);
-  const diffDays = Math.floor(diffHours / 24);
-
-  if (diffMinutes < 1) return "Agora há pouco";
-  if (diffMinutes < 60) return `${diffMinutes} min atrás`;
-  if (diffHours < 24) return `${diffHours} h atrás`;
-  return `${diffDays} d atrás`;
-}
-
-export default function RecentTracksList({ recentTracks }) {
+    if (diff < 60) return "agora";
+    if (diff < 3600) return `${Math.floor(diff / 60)} min atrás`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} h atrás`;
+    return `${Math.floor(diff / 86400)} d atrás`;
+  }
   return (
-    <section className="mb-12">
-      <div className="mb-5 flex items-center justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-            Atividade recente
-          </p>
-          <h2 className="text-2xl font-bold text-white">
-            Ouvidas recentemente
-          </h2>
-        </div>
-      </div>
+    <div>
+      <p className="mb-5 text-xs uppercase tracking-[0.2em] text-white/40">
+        Ouvidas recentemente
+      </p>
 
-      {recentTracks.length > 0 ? (
-        <div className="overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03]">
-          <div className="grid grid-cols-[56px_minmax(0,1fr)_auto] gap-4 border-b border-white/5 px-5 py-3 text-xs uppercase tracking-[0.18em] text-white/35">
-            <span></span>
-            <span>Título</span>
-            <span>Tempo</span>
-          </div>
-
-          <div className="divide-y divide-white/5">
-            {recentTracks.map((item, index) => {
-              const track = item.track;
-              const artists =
-                track?.artists?.map((artist) => artist.name).join(", ") ||
-                "Artista desconhecido";
-
-              return (
-                <div
-                  key={`${track?.id}-${index}`}
-                  className="grid grid-cols-[56px_minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 transition hover:bg-white/[0.04]"
-                >
-                  <div className="h-14 w-14 shrink-0 overflow-hidden rounded-md bg-white/10">
-                    {track?.album?.images?.[0]?.url ? (
-                      <img
-                        src={track.album.images[0].url}
-                        alt={track?.name}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : null}
-                  </div>
-
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-white">
-                      {track?.name || "Faixa desconhecida"}
-                    </p>
-                    <p className="truncate text-sm text-white/55">
-                      {artists}
-                      {track?.album?.name ? ` • ${track.album.name}` : ""}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col items-end gap-1 text-right">
-                    <span className="text-xs text-white/45">
-                      {getTimeAgo(item.played_at)}
-                    </span>
-                    <span className="text-sm text-white/70">
-                      {formatDuration(track?.duration_ms)}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+      {recentTracks.length === 0 ? (
+        <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/45">
+          Nenhuma música recente encontrada.
         </div>
       ) : (
-        <p className="text-white/60">Nenhuma música recente encontrada.</p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-8">
+          {recentTracks.slice(0, 24).map((item, index) => {
+            const track = item.track || item;
+            const playedAt = item.played_at;
+
+            return (
+              <motion.div
+                key={track.id || index}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: index * 0.04 }}
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-black/20 transition hover:bg-white/10"
+              >
+                {/* IMAGEM */}
+                <div className="relative">
+                  {track.album?.images?.[0]?.url ? (
+                    <img
+                      src={track.album.images[0].url}
+                      alt={track.name}
+                      className="h-28 w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-28 w-full items-center justify-center bg-white/10">
+                      🎵
+                    </div>
+                  )}
+
+                  {/* overlay hover */}
+                  <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/30" />
+                </div>
+
+                {/* INFO */}
+                <div className="p-3">
+                  <p className="truncate text-sm font-semibold text-white">
+                    {track.name}
+                  </p>
+                  <p className="truncate text-xs text-white/40">
+                    {track.artists?.map((a) => a.name).join(", ")}
+                  </p>
+                  <p className="mt-1 text-[11px] text-green-400/70">
+                    {playedAt ? getTimeAgo(playedAt) : ""}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       )}
-    </section>
+    </div>
   );
 }

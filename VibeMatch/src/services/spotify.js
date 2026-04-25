@@ -105,29 +105,9 @@ export async function fetchSpotifyProfile() {
 
 export async function fetchRecentlyPlayed() {
   return fetchSpotifyResource(
-    "https://api.spotify.com/v1/me/player/recently-played?limit=15",
+    "https://api.spotify.com/v1/me/player/recently-played?limit=30",
     "Erro ao buscar músicas recentes",
   );
-}
-
-export async function fetchMyPlaylists() {
-  const data = await fetchSpotifyResource(
-    "https://api.spotify.com/v1/me/playlists?limit=10",
-    "Erro ao buscar playlists",
-  );
-
-  // Busca detalhes completos de cada playlist
-  const items = data?.items || [];
-  const fullPlaylists = await Promise.all(
-    items.map((p) =>
-      fetchSpotifyResource(
-        `https://api.spotify.com/v1/playlists/${p.id}?fields=id,name,images,owner,tracks.total`,
-        `Erro ao buscar detalhes da playlist ${p.name}`,
-      ).catch(() => p)
-    )
-  );
-
-  return { items: fullPlaylists };
 }
 
 export async function fetchTopTracks() {
